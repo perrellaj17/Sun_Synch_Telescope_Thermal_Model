@@ -1,0 +1,454 @@
+S=1361 [W/m^2] {Solar Constant}
+sigma = 5.67e-8
+K_al = 167 [W/m*K]
+R_interface = 0.25 [W/K] 
+ A_surf = W*L
+ 
+ {Honeycomb Construction}
+t_honey = 2.0e-2 [m]
+ {thickness of honeycomb 2 cm}
+t_ribbon = 1.0e-3 [m] 
+{wall ribbon thickness 1mm} 
+ext_factor = 4/3
+{cell based extension factor, normal honeycomb structure makes theta 60 deg here} 
+t_face = 1.5e-3 [m]
+{facesheet thickness (both sides) 1.5 mm}
+size = 2.0e-2 [m]
+{honeycomb cell size 2 cm}
+L = 1 [m]
+ {Overall honeycomb length in ribbon direction}
+W = 0.34491 [m] 
+{Overall honeycomb width  perpendicular to ribbon direction}
+ 
+ 
+{Power loads for each component, hot and cold}
+g_1_h = 0.75
+g_1_c =0.75
+g_2_h = 22.5
+g_2_c = 22.5
+g_3_h = 41.25
+g_3_c =41.25
+g_4_h = 0
+g_4_c =0
+g_5_h = 92
+g_5_c =92
+g_6_h = 2
+g_6_c =2
+g_7_h = 8.75
+g_7_c =8.75
+g_8_h = 1.75
+g_8_c =1.75
+g_9_h = 0.375
+g_9_c  = 0.375
+g_10_h = 1.66
+g_10_c =1.66
+g_11_h = 0.6
+g_11_c =0.6
+ 
+ 
+ 
+ 
+ 
+ 
+{S band antenna}
+l_e_1 = 0.2 
+{KA band antenna}
+l_e_2 = l_e_1
+{TWT comms}
+l_e_3 = 0.22
+{Battery}
+l_e_4 = 0.07
+{Power Distribution}
+l_e_5 = 0.08
+{Star Tracker}
+l_e_6 = 0.3
+{CDH}
+l_e_7 = 0.23
+{LPT}
+l_e_8 = 0.0443
+{IMU}
+l_e_9 = 0.1
+{RWS}
+l_e_10 = 0.18
+{Torquer}
+l_e_11 = 0.03
+{Missing Mass Power}
+"l_e_12 = 0.1"
+ 
+ 
+mm_to_m = 1000000
+ 
+{Contact area between e box and the bus structure, converting from mmà2 to mà2}
+A_1_e = 5026.5/mm_to_m 
+A_2_e = 5026.5/mm_to_m 
+A_3_e = 96800/mm_to_m 
+A_4_e = 1500/mm_to_m 
+A_5_e = 2400/mm_to_m 
+A_6_e = 16467/mm_to_m 
+A_7_e = 92400/mm_to_m 
+A_8_e = 17600/mm_to_m 
+A_9_e = 6000/mm_to_m 
+A_10_e = 10800/mm_to_m 
+A_11_e = 15000/mm_to_m 
+"A_12_e = 5000/mm_to_m "
+ 
+ 
+ 
+ 
+ 
+ 
+{Ebox Insulation}
+K_g = 0.596 [W/m*K]
+{R_insulation = t_i / (K_g*(A+eboxà2))}
+ 
+{E-box resistance}
+R_e1 = (l_e_1/2)/(K_al*A_1_e) + R_interface 
+R_e2 = (l_e_2/2)/(K_al*A_2_e) + R_interface {+0.002/ (K_g*(A_2_e*A_2_e))}
+R_e3 = (l_e_3/2)/(K_al*A_3_e) + R_interface
+R_e4 = (l_e_4/2)/(K_al*A_4_e) + R_interface {+ 0.002/ (K_g*(A_4_e*A_4_e))}
+R_e5 = (l_e_5/2)/(K_al*A_5_e) + R_interface
+R_e6 = (l_e_6/2)/(K_al*A_6_e) + R_interface
+R_e7 = (l_e_7/2)/(K_al*A_7_e) + R_interface
+R_e8 = (l_e_8/2)/(K_al*A_8_e) + R_interface
+R_e9 = (l_e_9/2)/(K_al*A_9_e) + R_interface
+R_e10 = (l_e_10/2)/(K_al*A_10_e) + R_interface
+R_e11 = (l_e_11/2)/(K_al*A_11_e) + R_interface
+"R_12_e = (l_e_12/2)/(K_al*A_12_e) + R_interface + R_insulation"
+ 
+ 
+{S band antenna}
+{KA band antenna}
+{TWT comms}
+{Battery}
+{Power Distribution}
+{Star Tracker}
+{CDH}
+{LPT}
+{IMU}
+{RWS}
+{Torquer}
+ 
+ 
+{E-box to isotherm resistance}
+R_1_e2 = R_e2 + R_L_1_2 + R_T_1_2
+R_1_e4 = R_e4 + R_L_1_4
+R_2_e6 = R_e6 + R_L_2_6 + R_T_2_6
+R_3_e9 = R_e9 + R_L_3_9
+R_3_e8 = R_e8 + R_L_3_8
+R_4_e5 = R_e5 + R_L_4_5
+R_4_e7 = R_e7 + R_L_4_7
+R_5_e11 = R_e11 + R_L_5_11
+R_6_e3 = R_e3 + R_L_6_3
+R_8_e10 = R_e10 + R_L_8_10 
+R_8_e1 = R_e1 + R_L_8_1 + R_T_8_1
+ 
+ 
+{E-box to isotherm structure resistance}
+R_L_1_2 = 1/(3*K_al*t_ribbon/(2*size))*(W*t_honey /0.5)
+R_T_1_2 = 1/(8*K_al*t_ribbon/(3*size))*(0.1395*W/t_honey)
+R_L_1_4 = 1/(3*K_al*t_ribbon/(2*size))*( W*t_honey /0.205)
+R_L_2_6 = 1/(3*K_al*t_ribbon/(2*size))*(W*t_honey/0.5)
+R_T_2_6 = 1/(8*K_al*t_ribbon/(3*size))*(0.0982*W/t_honey)
+R_L_8_1 = 1/(3*K_al*t_ribbon/(2*size))*(W*t_honey /0.5)
+R_T_8_1 = 1/(8*K_al*t_ribbon/(3*size))*(0.0552*W/t_honey)
+R_L_3_9 = 1/(3*K_al*t_ribbon/(2*size))*( W*t_honey /0.106)
+R_L_3_8 = 1/(3*K_al*t_ribbon/(2*size))*( W*t_honey /0.085)
+R_L_4_5 = 1/(3*K_al*t_ribbon/(2*size))*( W*t_honey /0.1)
+R_L_4_7 = 1/(3*K_al*t_ribbon/(2*size))*( W*t_honey /0.135)
+R_L_5_11= 1/(3*K_al*t_ribbon/(2*size))*( W*t_honey /0.002)
+R_L_6_3 = 1/(3*K_al*t_ribbon/(2*size))*( W*t_honey /0.07)
+R_L_8_10= 1/(3*K_al*t_ribbon/(2*size))*( W*t_honey /0.29)
+ 
+ 
+ 
+{Thermal flux from e box to side panel}
+Q_dot_1_e2 =  (T_1-T_e2)/R_1_e2
+Q_dot_2_e4 =  (T_2-T_e4)/R_1_e4 {THIS IS WHERE I MOVE THE BATTERY TO SURFACE 8}
+Q_dot_2_e6 =   (T_2-T_e6)/R_2_e6
+Q_dot_3_e9 =   (T_3-T_e9)/R_3_e9
+Q_dot_3_e8 =   (T_3-T_e8)/R_3_e8
+Q_dot_4_e5 =   (T_4-T_e5)/R_4_e5
+Q_dot_4_e7 =   (T_4-T_e7)/R_4_e7
+Q_dot_5_e11 =   (T_5-T_e11)/R_5_e11
+Q_dot_6_e3 =   (T_6-T_e3)/R_6_e3
+Q_dot_8_e10 =   (T_8-T_e10)/R_8_e10
+Q_dot_8_e1 =   (T_8-T_e1)/R_8_e1
+ 
+ 
+ 
+ 
+{Radiator outer surface emissivity and absorptivity}
+eps_rad = 0.89
+ {Z93 White Paint}
+abs_rad = 0.19 
+{Z93 White Paint}
+ 
+ 
+{Conductance of Honeycomb in the T direction}
+C_T = (8*K_al*t_ribbon/(3*size))*(L*W/t_honey)
+{Conductance of Honeycomb in the L direction} 
+C_L = (3*K_al*t_ribbon/(2*size))*( W*t_honey /L)
+{Conductance of Honeycomb in the W direction}
+C_W = (K_al*t_ribbon/(size))*(L*t_honey/W)
+  
+ 
+ 
+ 
+{Define Thermal Conductances}
+R_8_1 = 1/C_W
+R_3_1 = 1/C_W
+R_6_2 = 1/C_W
+R_5_2 = 1/C_W
+R_4_3 = 1/C_W
+ 
+R_5_4 = 1/C_W
+R_7_6 = 1/C_W
+R_7_8 = 1/C_W
+ 
+{Define Thermal flux between panels }
+Q_dot_8_1_c =  (T_8-T_1)/R_8_1
+Q_dot_3_1_c =  (T_3-T_1)/R_3_1
+ 
+Q_dot_6_2_c = (T_6-T_2)/R_6_2
+Q_dot_5_2_c =  (T_5-T_2)/R_5_2
+ 
+Q_dot_4_3_c = (T_4-T_3)/R_4_3 
+Q_dot_5_4_c =  (T_5-T_4)/R_5_4
+Q_dot_7_6_c = (T_7-T_6)/R_7_6 
+Q_dot_7_8_c =  (T_7-T_8)/R_7_8
+ 
+ 
+ 
+{Add thermal strap from 4 to 2 }
+ 
+{thermal strap conductance, add if you need to include it for additional conductance}
+C_strap_1 = 1.815
+C_strap_2 = 0
+Q_dot_4_2_c = (T_4-T_2)*C_strap_1
+ 
+ 
+ 
+ 
+{Rejection of radiation}
+Q_dot_rej_rad_1 = eps_rad*A_surf*sigma*(T_1^4)
+Q_dot_rej_rad_2 = eps_rad*A_surf*sigma*(T_2^4)
+ 
+{Ebox Energy Balances}
+Q_dot_rej_rad_1 =  Q_env_1 + Q_dot_8_1_c + Q_dot_3_1_c + Q_dot_1_e2  
+{Node1}
+Q_dot_rej_rad_2 = Q_env_2 + Q_dot_6_2_c + Q_dot_5_2_c + Q_dot_2_e6 + Q_dot_4_2_c + Q_dot_2_e4  {THIS IS WHERE I MOVE THE BATTERY TO SURFACE 2}
+{Node2}
+Q_dot_3_1_c   =  Q_dot_4_3_c + Q_dot_3_e8 + Q_dot_3_e9
+{Node 3}
+Q_dot_4_3_c + Q_dot_4_2_c =  Q_dot_5_4_c +Q_dot_4_e5 + Q_dot_4_e7
+{Node4}
+Q_dot_5_4_c + Q_dot_5_2_c = Q_dot_5_e11
+{Node 5}
+Q_6_2_c =  Q_dot_7_6_c + Q_dot_6_e3
+{Node 6}
+Q_dot_7_6_c + Q_dot_7_8_c = 0
+{Node 7}
+Q_dot_8_1_c =  Q_dot_7_8_c + Q_dot_8_e10 + Q_dot_8_e1 
+{Node 8}
+ 
+ 
+Q_dot_1_e2 =  g_2
+Q_dot_2_e4 =  g_4
+Q_dot_2_e6 =   g_6
+Q_dot_3_e9 =   g_9
+Q_dot_3_e8 =   g_8
+Q_dot_4_e5 =   g_5
+Q_dot_4_e7 =   g_7
+Q_dot_5_e11 =  g_11
+Q_dot_6_e3 =   g_3
+Q_dot_8_e10 =   g_10
+Q_dot_8_e1 =  g_1
+ 
+ 
+ 
+  {%%%%%%%%%%%%%%%%%%%%%%}
+ 
+ {SpaceCube System Energy Balances - Min}
+ 
+  {%%%%%%%%%%%%%%%%%%%%%%}
+" 
+g_1 = g_1_c 
+g_2 = g_2_c
+g_3 = g_3_c
+g_4 = g_4_c
+g_5 = g_5_c
+g_6 = g_6_c
+g_7 = g_7_c
+g_8 = g_8_c
+g_9 = g_9_c 
+g_10 = g_10_c
+g_11 = g_11_c
+ 
+ 
+{ENVIRONMENTAL LOADS FROM PPT AND apply absorptivity}
+ 
+{R1 Earth facing, R2 deep space}
+Q_env_1 = 54.57*abs_rad {inside, minus y away from eary in the cold beta 88deg}
+Q_env_2 = 0  {outside, minus y away from eary in the cold beta 88deg}
+ 
+{R2 Earth facing, R1 deep space}
+{Q_env_1 = 0 {inside, minus y away from eary in the cold beta 88deg}
+Q_env_2 = 54.57*abs_rad {outside, minus y away from eary in the cold beta 88deg}}
+ 
+ 
+ 
+ 
+{DO I GET ANY HEATING POWER?}
+Q_dot_AdditionalHeating = 0
+ 
+{System level energy balance}
+g_t = g_1 + g_2 + g_3 + g_4 + g_5 + g_6 + g_7 + g_8 + g_9 + g_10 + g_11
+g_t  + Q_env_1 + Q_env_2 =  Q_dot_rej_rad_1 + Q_dot_rej_rad_2
+ 
+ "
+ 
+ 
+ 
+ 
+ 
+ 
+  {%%%%%%%%%%%%%%%%%%%%%%}
+ 
+ {SpaceCube System Energy Balances - Max}
+ 
+ {%%%%%%%%%%%%%%%%%%%%%%}
+ 
+ 
+ 
+ g_1 = g_1_h 
+g_2 = g_2_h
+g_3 = g_3_h
+g_4 = g_4_h
+g_5 = g_5_h
+g_6 = g_6_h
+g_7 = g_7_h
+g_8 = g_8_h
+g_9 = g_9_h 
+g_10 = g_10_h
+g_11 = g_11_h
+ 
+ 
+{ENVIRONMENTAL LOADS FROM PPT AND apply absorptivity }
+{R1 Earth facing, R2 deep space}
+Q_env_1 = 77.54*abs_rad {inside, minus y away from eary in the cold beta 88deg}
+Q_env_2 = 0  {outside, minus y away from eary in the cold beta 88deg}
+{R2 Earth facing, R1 deep space}
+{Q_env_1 = 0 {inside, minus y away from eary in the cold beta 88deg}
+Q_env_2 = 77.54*abs_rad {outside, minus y away from eary in the cold beta 88deg}}
+ 
+ 
+ 
+{DO I GET ANY HEATING POWER?}
+Q_dot_AdditionalHeating = 0
+{System level energy balance}
+g_t = g_1 + g_2 + g_3 + g_4 + g_5 + g_6 + g_7 + g_8 + g_9 + g_10 + g_11
+g_t  + Q_env_1 + Q_env_2 =  Q_dot_rej_rad_1 + Q_dot_rej_rad_2
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ {%%%%%%%%%%%%%%%%%%%%%%}
+ 
+   	{           Min Max Temps     }
+ 
+ {%%%%%%%%%%%%%%%%%%%%%%}
+ 
+ 
+ 
+ 
+ 
+{Thermal flux from e box to side panel}
+T_e1_min = T_e1 - 153
+T_e2_min = T_e2 - 233
+T_e3_min =T_e3 - 233
+T_e4_min = T_e4 - 283
+T_e5_min =T_e5 -  218
+T_e6_min = T_e6 - 0
+T_e7_min = T_e7 - 233.15
+T_e8_min = T_e8 - 153
+T_e9_min = T_e9 - 233
+T_e10_min = T_e10- 253
+T_e11_min = T_e11 - 243
+ 
+T_e1_max = 393-5 - T_e1
+T_e2_max = 358-5 - T_e2
+T_e3_max = 358-5 - T_e3
+T_e4_max = 303-5 - T_e4
+T_e5_max = 350-5 - T_e5
+T_e6_max = 400-5 - T_e6
+T_e7_max = 333.15-5 - T_e7
+T_e8_max = 393-5 - T_e8
+T_e9_max = 358-5 - T_e9
+T_e10_max = 343-5 - T_e10
+T_e11_max = 333-5 - T_e11
+ 
+ 
+ 
+ 
+ " {
+EIR_min = 193
+albedo_min = 0.3
+Q_env_1 = 54.57+50 {inside, plus y, facing earth in the cold beta 88deg}
+Q_env_2 = 140 {outside, minus y, away from earth, in the cold beta 88deg}
+ Q_dot_EIR_rad = eps_rad*A_surf*EIR_min*F_s_e
+Q_dot_albedo = albedo_min*abs_rad*S*A_surf*F_s_e
+Q_dot_solar = abs_m*S*A_surf*F_s_e
+  }
+ 
+ 
+{Geometry}
+b = 0.25 [m]
+A_ebox = b*b  
+ 
+{Wall Geometry}
+A_surf = W*L
+L_inner_wall =  W - 2*(2*t_face + t_honey)
+A_struct_i = (L_inner_wall- 2*(2*t_face + t_honey))^2  
+ 
+ 
+ 
+ 
+ {Non-Ideal MLI Heat Leakage}
+eps_m = 0.24
+abs_m = 0.23
+eps_MLI = 1/((N_lay+1)*(1/eps_m + 1/eps_m - 1))
+{Effective emittance}
+Q_dot_MLI = A_surf*eps_MLI*sigma*(T_o^4-T_i^4) + (T_4-T_i)/R_4_a
+ 
+ 
+ 
+{Q_dot_EIR_rad + Q_dot_albedo +  Q_dot_4_5_c  = Q_dot_rej_rad  + Q_dot_AdditionalHeating}
+{Node 5}
+ 
+ 
+{Conductive Energy Balance}
+{Resistivities}
+R_3_a = 1/((3*K_al*t_ribbon/(2*size))* (t_honey/(0.225- (t_honey/2))))
+R_2_a = R_3_a
+R_1_a = 1/( (3*K_al*t_ribbon/(2*size))*(t_honey/(0.125+0.65- (t_honey/2))))
+ 
+R_4_a = 1/((8*K_al*t_ribbon/(3*size))*(2/t_honey))
+R_4_b = 1/((K_al*t_ribbon/(size))*(t_honey/(0.5-(t_honey/2))))
+R_4_c = 1/( (3*K_al*t_ribbon/(2*size))*(t_honey/(0.5-(t_honey/2))))
+R_4_d = R_4_c
+R_4_e = R_4_b
+ 
+{Add straps in parallel to the resistance ovvered by honeycomb structure}
+1/(R_4_1) = 1/(2*R_4_a + R_4_b + R_3_a + R_interface + R_ebox) + C_strap_2
+1/(R_4_2) =  1/(2*R_4_a + R_4_b + R_2_a + R_interface + R_ebox) + C_strap_1
+1/(R_4_3) =  1/(2*R_4_a + R_4_b + R_1_a + R_interface + R_ebox) + C_strap_1
+R_4_5_eff = (4/(R_4_a + R_4_b + R_4_c +R_4_d + R_4_e) )
+Q_dot_1_4_c = (T_1-T_4)/R_4_1
+Q_dot_2_4_c =  (T_2-T_4)/R_4_2
+Q_dot_3_4_c =  (T_3-T_4)/R_4_3
+Q_dot_4_5_c = (T_4-T_5)/R_4_5_eff
